@@ -6,6 +6,7 @@ const {
   updateReview,
   deleteReview,
 } = require('../controllers/reviews-controller')
+const { validateMongoId } = require('../middlewares/validateMongoId')
 const router = express.Router()
 
 // Add a new review.
@@ -15,12 +16,12 @@ router.post('/', createReview)
 router.get('/', getReviews)
 
 // Get details for a specific review.
-router.get('/:id', getReview)
+router.get('/:id', validateMongoId, getReview)
 
 // Update a specific review.
-router.put('/:id', updateReview)
+router.put('/:id', validateMongoId, updateReview)
 
 // Delete a specific review.
-router.delete('/:id', deleteReview)
+router.delete('/:id', validateMongoId, deleteReview)
 
 module.exports = router

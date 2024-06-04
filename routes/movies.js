@@ -9,6 +9,7 @@ const {
   getMoviesWithRating,
 } = require('../controllers/movies-controller')
 const { isAdmin } = require('../middlewares/isAdmin')
+const { validateMongoId } = require('../middlewares/validateMongoId')
 const router = express.Router()
 
 /*
@@ -22,10 +23,10 @@ router.get('/', getMovies)
 router.get('/ratings', getMoviesWithRating)
 
 // Get details for a specific movie.
-router.get('/:id', getMovieById)
+router.get('/:id', validateMongoId, getMovieById)
 
 // Get all reviews for a specific movie.
-router.get('/:id/reviews', getMovieReviews)
+router.get('/:id/reviews', validateMongoId, getMovieReviews)
 
 /*
  * Only Admin can access the routes below.
@@ -38,9 +39,9 @@ router.use(isAdmin)
 router.post('/', addMovie)
 
 // Update a specific movie.
-router.put('/:id', updateMovie)
+router.put('/:id', validateMongoId, updateMovie)
 
 // Delete a specific movie.
-router.delete('/:id', deleteMovie)
+router.delete('/:id', validateMongoId, deleteMovie)
 
 module.exports = router

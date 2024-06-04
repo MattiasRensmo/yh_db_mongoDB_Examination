@@ -84,15 +84,10 @@ exports.getReview = async (req, res) => {
 exports.updateReview = async (req, res) => {
   try {
     const userId = req.user.id
-    const reviewId = req.params.id
     const { rating, comment } = req.body
 
-    if (!mongoose.Types.ObjectId.isValid(reviewId)) {
-      return res.status(400).send('Invalid review ID')
-    }
-
     // Get the review and check if we found something
-    const review = await Review.findById(reviewId)
+    const review = await Review.findById(req.params.id)
     if (!review) {
       return res.status(404).send('Review not found')
     }
@@ -119,10 +114,7 @@ exports.deleteReview = async (req, res) => {
     const userId = req.user.id
     const reviewId = req.params.id
 
-    if (!mongoose.Types.ObjectId.isValid(reviewId)) {
-      return res.status(400).send('Invalid review ID')
-    }
-
+    //We need to get the review to check if the user is allowed to delete it
     const review = await Review.findById(reviewId)
     if (!review) {
       return res.status(404).send('Review not found')
