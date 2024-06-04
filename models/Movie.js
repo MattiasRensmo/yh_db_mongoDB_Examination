@@ -16,7 +16,7 @@ const movieSchema = new mongoose.Schema({
       1888,
       'The first movie ever was made in 1888. You cant go earlier than that.',
     ],
-    max: [new Date().getFullYear(), `Release year can't be in the future.`],
+    max: [new Date().getFullYear(), "Release year can't be in the future."],
   },
   genre: {
     type: String,

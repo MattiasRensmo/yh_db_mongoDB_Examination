@@ -2,7 +2,6 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-//Hantera routen /register
 exports.register = async (req, res) => {
   try {
     const password = req.body.password
@@ -13,12 +12,12 @@ exports.register = async (req, res) => {
         .json({ error: 'Password must be at least 6 characters long.' })
     const passwordHashed = await bcrypt.hash(password, 10)
 
-    //Mongo will validate the rest of the data.
+    // The Schema will validate the username, email, role of the data.
     const user = new User({ ...req.body, password: passwordHashed })
     const { username, email, role, _id } = await user.save()
     return res.status(201).json({ username, email, role, id: _id })
   } catch (error) {
-    console.log(error)
+    //We cant validate unique fields in the schema, so we need to check for duplicate errors here.
     if (error.code === 11000) {
       return res
         .status(400)
@@ -28,7 +27,6 @@ exports.register = async (req, res) => {
   }
 }
 
-//Hantera routen /login
 exports.login = async (req, res) => {
   const { username, password, email } = req.body
   if (!username && !email) {

@@ -83,10 +83,10 @@ exports.getMovieReviews = async (req, res) => {
   }
 }
 
-// Return list with all movies and their average rating. Rating: null if none exists.
 exports.getMoviesWithRating = async (req, res) => {
   try {
     const movies = await Movie.aggregate([
+      // Find reviews with the same movieId as the _id in Movie collection.
       {
         $lookup: {
           from: 'reviews',
@@ -95,6 +95,7 @@ exports.getMoviesWithRating = async (req, res) => {
           as: 'reviews',
         },
       },
+      // Choose the fields to display and calculate the average rating.
       {
         $project: {
           title: 1,

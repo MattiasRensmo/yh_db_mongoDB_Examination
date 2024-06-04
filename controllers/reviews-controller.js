@@ -1,7 +1,6 @@
 //Reviews controller
 const mongoose = require('mongoose')
 const Review = require('../models/Review')
-const User = require('../models/User')
 const Movie = require('../models/Movie')
 
 exports.createReview = async (req, res) => {
@@ -46,7 +45,6 @@ exports.getReviews = async (req, res) => {
 
     res.send(reviewsWithNames)
   } catch (error) {
-    console.log(error)
     res.status(500).send(error.message)
   }
 }

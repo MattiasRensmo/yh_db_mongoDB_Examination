@@ -1,6 +1,5 @@
-//**Review:** movieId (referens till Movie), userId (referens till User), rating, comment, createdAt.
-
 const mongoose = require('mongoose')
+
 const reviewSchema = new mongoose.Schema({
   movieId: {
     type: mongoose.Schema.Types.ObjectId,

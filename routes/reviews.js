@@ -8,19 +8,19 @@ const {
 } = require('../controllers/reviews-controller')
 const router = express.Router()
 
-// POST /reviews: Lägg till en ny recension.
+// Add a new review.
 router.post('/', createReview)
 
-// GET /reviews: Hämta en lista med alla recensioner.
+// Get a list with all reviews.
 router.get('/', getReviews)
 
-// GET /reviews/:id: Hämta detaljer för en specifik recension.
+// Get details for a specific review.
 router.get('/:id', getReview)
 
-// PUT /reviews/:id: Uppdatera en specifik recension.
+// Update a specific review.
 router.put('/:id', updateReview)
 
-// DELETE /reviews/:id: Ta bort en specifik recension.
+// Delete a specific review.
 router.delete('/:id', deleteReview)
 
 module.exports = router
