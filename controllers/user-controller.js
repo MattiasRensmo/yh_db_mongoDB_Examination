@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
   }
   if (await bcrypt.compare(password, dbUser.password)) {
     const token = jwt.sign(
-      { username: dbUser.username, role: dbUser.role },
+      { username: dbUser.username, role: dbUser.role, id: dbUser._id },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     )
