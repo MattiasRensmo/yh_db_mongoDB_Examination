@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { register } = require('../controllers/user-controller')
 
-//POST /register: Registrera en ny användare.
+//Create a new user.
 router.post('/', register)
 
 module.exports = router

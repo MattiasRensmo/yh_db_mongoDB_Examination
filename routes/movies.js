@@ -5,6 +5,8 @@ const {
   getMovieById,
   updateMovie,
   deleteMovie,
+  getMovieReviews,
+  getMoviesWithRating,
 } = require('../controllers/movies-controller')
 const { isAdmin } = require('../middlewares/isAdmin')
 const router = express.Router()
@@ -13,21 +15,17 @@ const router = express.Router()
  * Every user can access the routes below.
  */
 
-// GET /movies: Hämta en lista med alla filmer.
+// Get a list with all movies.
 router.get('/', getMovies)
 
-// GET /movies/:id: Hämta detaljer för en specifik film.
+// Get a list with all movies and their average rating.
+router.get('/ratings', getMoviesWithRating)
+
+// Get details for a specific movie.
 router.get('/:id', getMovieById)
 
-// GET /movies/:id/reviews: Hämta alla recensioner för en specifik film.
-router.get('/:id/reviews', (req, res) => {
-  res.send('Hämta alla recensioner för en specifik film.')
-})
-
-//GET /movies/ratings: Hämta en lista med alla filmer och deras genomsnittliga betyg.
-router.get('/ratings', (req, res) => {
-  res.send('Hämta en lista med alla filmer och deras genomsnittliga betyg.')
-})
+// Get all reviews for a specific movie.
+router.get('/:id/reviews', getMovieReviews)
 
 /*
  * Only Admin can access the routes below.
@@ -36,13 +34,13 @@ router.get('/ratings', (req, res) => {
 
 router.use(isAdmin)
 
-// POST /movies: Lägg till en ny film.
+// Add a new movie.
 router.post('/', addMovie)
 
-// PUT /movies/:id: Uppdatera en specifik film.
+// Update a specific movie.
 router.put('/:id', updateMovie)
 
-// DELETE /movies/:id: Ta bort en specifik film.
+// Delete a specific movie.
 router.delete('/:id', deleteMovie)
 
 module.exports = router
