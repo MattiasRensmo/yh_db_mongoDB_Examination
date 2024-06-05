@@ -61,7 +61,7 @@ exports.getMovieReviews = async (req, res) => {
       'username'
     )
 
-    if (!reviews || reviews.length === 0) {
+    if (!reviews) {
       return res.status(404).json({ error: 'Movie not found.' })
     }
 
@@ -77,6 +77,7 @@ exports.getMovieReviews = async (req, res) => {
       }
     })
 
+    // Return empty array if no reviews found.
     return res.json(reviewsResponse)
   } catch (error) {
     return res.status(400).json({ error: error.message })
