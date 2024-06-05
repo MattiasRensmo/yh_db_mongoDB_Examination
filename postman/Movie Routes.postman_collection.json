@@ -1,0 +1,170 @@
+{
+  "info": {
+    "_postman_id": "aa42cade-aeaf-4b45-8f5e-f0cb992a3529",
+    "name": "Movie Routes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33318573"
+  },
+  "item": [
+    {
+      "name": "Add a new movie",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Response status code is 200\", function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "let response = pm.response.json()",
+              "pm.collectionVariables.set(\"movieId\", response._id );"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Test Movie 4\",\r\n    \"director\": \"Test Director\",\r\n    \"releaseYear\": 2024,\r\n    \"genre\": \"Test\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/movies",
+          "host": ["{{url}}"],
+          "path": ["movies"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all movies",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/movies",
+          "host": ["{{url}}"],
+          "path": ["movies"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all movies and their ratings",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/movies/ratings",
+          "host": ["{{url}}"],
+          "path": ["movies", "ratings"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get a specific movie",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/movies/:id",
+          "host": ["{{url}}"],
+          "path": ["movies", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "665f15f238f9453065bb5363",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update a specific movie",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"11\",\r\n    \"releaseYear\":2024\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/movies/:id",
+          "host": ["{{url}}"],
+          "path": ["movies", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{movieId}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all reviews for a specific movie",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/movies/:id/reviews",
+          "host": ["{{url}}"],
+          "path": ["movies", ":id", "reviews"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{movieId}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete specific movie",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/movies/:id",
+          "host": ["{{url}}"],
+          "path": ["movies", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "{{movieId}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "movieId",
+      "value": "665ce2c2cbb9d12d0a32df6e",
+      "type": "string"
+    }
+  ]
+}

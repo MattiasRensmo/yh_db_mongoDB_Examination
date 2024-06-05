@@ -1,0 +1,54 @@
+{
+  "info": {
+    "_postman_id": "03c3f773-b60d-4d42-8111-c3eff2ea78fd",
+    "name": "User Routes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33318573"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"adminnamn\",\n    \"email\": \"adminepost@example.com\",\n    \"password\": \"lösenord\",\n    \"role\": \"admin\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/register",
+          "host": ["{{url}}"],
+          "path": ["register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"adminnamn\",\n    \"password\": \"lösenord\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/login",
+          "host": ["{{url}}"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
